@@ -48,7 +48,7 @@ class LowRankOperator:
         dUtx = self.d*Utx   #elementwise mult
         y.zero()
         self.U.reduce(y, dUtx)
-        
+
     def inner(self, x, y):
         Utx = self.U.dot_v(x)
         Uty = self.U.dot_v(y)
