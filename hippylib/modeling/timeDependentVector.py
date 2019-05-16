@@ -65,7 +65,9 @@ class TimeDependentVector(object):
         Return a copy of all the time frames and snapshots
         """
         if other is not None:
-            return self._deprecated_copy(other)
+            self.zero()
+            return self.axpy(1., other)
+            # return self._deprecated_copy(other)
         
         res = TimeDependentVector(self.times, tol=self.tol, mpi_comm=self.mpi_comm)
         res.data = []

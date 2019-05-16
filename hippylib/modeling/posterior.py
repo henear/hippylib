@@ -42,10 +42,22 @@ class LowRankHessian:
         return Hx.inner(y)
         
     def mult(self, x, y):
-        self.prior.R.mult(x,y)
+        #RHRx = y i.e. A = RHR, Ax, but we dont actually store A
+        #return y
+
+        self.prior.R.mult(x,y) 
         self.LowRankH.mult(y, self.help)
         self.prior.R.mult(self.help,self.help1)
-        y.axpy(1, self.help1)
+        #y.zero()
+        y.axpy(1, self.help1) #y.axpy(1,help1)   => y +=1*help）    
+        #y=0
+        #y+=help， y+= RHRx
+
+        #R =C^-1
+        #Rsolver, i.e. C^-1 x = b
+        #ie. Rsolver = C
+
+        #C^{-1}   B Hlr again[st Identity vectors]
         
         
     def solve(self, sol, rhs):
