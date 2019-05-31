@@ -1,0 +1,2 @@
+Hessian: Second derivative matrix
+Hermitian: A matrix equals its hermitian transpose
