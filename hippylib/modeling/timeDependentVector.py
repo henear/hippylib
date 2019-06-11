@@ -25,7 +25,7 @@ class TimeDependentVector(object):
     specified in the constructor.
     """
     
-    def __init__(self, times, tol=1e-10, mpi_comm = mpi_comm_world()):
+    def __init__(self, times, tol=1e-3, mpi_comm = mpi_comm_world()):
         """
         Constructor:
 
@@ -109,11 +109,11 @@ class TimeDependentVector(object):
         i = 0
         while i < self.nsteps-1 and 2*t > self.times[i] + self.times[i+1]:
             i += 1
-            
-        assert abs(t - self.times[i]) < self.tol
+
+        if abs(t - self.times[i]) < self.tol:
         
-        self.data[i].zero()
-        self.data[i].axpy(1., u )
+                self.data[i].zero()
+                self.data[i].axpy(1., u )
         
     def retrieve(self, u, t):
         """
@@ -124,10 +124,10 @@ class TimeDependentVector(object):
         while i < self.nsteps-1 and 2*t > self.times[i] + self.times[i+1]:
             i += 1
             
-        assert abs(t - self.times[i]) < self.tol
+        if abs(t - self.times[i]) < self.tol:
         
-        u.zero()
-        u.axpy(1., self.data[i] )
+                u.zero()
+                u.axpy(1., self.data[i] )
         
     def norm(self, time_norm, space_norm):
         """
