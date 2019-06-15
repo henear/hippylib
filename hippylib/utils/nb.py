@@ -127,6 +127,10 @@ def multi1_plot(objs, titles, same_colorbar=True, show_axis='off', logscale=Fals
     elif nobj == 3:
         plt.figure(figsize=(18,4))
         subplot_loc = 130
+    elif nobj % 2 == 0:
+        plt.figure(figsize=(7.5*nobj, 5))
+        subplot_loc = 100 + 10 * nobj
+    
     else:
         raise AttributeError("Too many figures")
              
