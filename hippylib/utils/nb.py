@@ -281,12 +281,14 @@ def plot_eigenvectors(Vh, U, mytitle, which = [0,1,2,5,10,15], cmap = None):
     title_stamp = mytitle + " {0}" 
     u = dl.Function(Vh)
     counter=1
-    for i in which:
+    for w in range(len(which)):
+        i = which[w]
         assert i < U.nvec()
-        if (U[i])[0] >= 0:
-            s = 1./U[i].norm("linf")
-        else:
-            s = -1./U[i].norm("linf")
+        if not uNorm:
+            if (U[i])[0] >= 0:
+                s = 1./U[i].norm("linf")
+            else:
+                s = -1./U[i].norm("linf")
         u.vector().zero()
         u.vector().axpy(s, U[i])
         plot(u, subplot_loc=(subplot_loc+counter), mytitle=title_stamp.format(i), vmin=-1, vmax=1, cmap = cmap)
